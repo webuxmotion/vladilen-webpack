@@ -1,35 +1,33 @@
-// import * as $ from 'jquery';
-// import React from 'react';
-// import { render } from 'react-dom';
-// import Post from '@models/Post';
-// import './babel';
-// import '@/styles/styles.css';
-// import json from '@/assets/data';
-// import csv from '@/assets/data.csv';
-// import xml from '@/assets/data.xml';
-// import WebpackLogo from '@/assets/webpack-logo';
-// import './styles/box.less';
-// import './styles/logo.scss';
+const letters = ["A", "B", "C"];
 
-// const post = new Post('Webpack Post Title', WebpackLogo);
+const createReversedIterator = array => ({
+  [Symbol.iterator]() {
+    let i = array.length;
 
-// $('pre').addClass('code code--red').html(post.toString());
+    return {
+      next: () => ({
+        value: array[--i],
+        done: i < 0
+      })
+    }
+  }
+});
 
-// const App = () => (
-//   <div>
-//     <h2>React APP</h2>
-//   </div>
-// );
+const reverseIterator = function*(array) {
+  let i = array.length;
 
-// render(<App />, document.getElementById('app'));
+  while(i > 0) {
+    yield array[--i];
+  }
+}
 
-// console.log(json.title, xml, csv);
+// for (let value of reverseIterator(letters)) {
+//   console.log(value);
+// }
 
-// import './typescript/types.ts';
-// import './typescript/interfaces.ts';
-// import './typescript/enum.ts';
-// import './typescript/functions.ts';
-// import './typescript/classes.ts';
-// import './typescript/guards.ts';
-// import './typescript/generic.ts';
-import './typescript/operators.ts';
+const iterator = reverseIterator(letters);
+
+console.log(iterator.next());
+console.log(iterator.return());
+console.log(iterator.next());
+console.log(iterator.next());
